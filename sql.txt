@@ -1,0 +1,63 @@
+create database foodmall;
+
+use foodmall;
+
+create table member(
+memId varchar(20) PRIMARY KEY,
+memPw varchar(20) NOT NULL,
+memName varchar(20) NOT NULL,
+memAddr varchar(100) NOT NULL,
+memTel varchar(20),
+memGrade int
+)default charset=utf8 collate utf8_general_ci;
+
+set character set 'euckr';
+insert into member values('100','100','가나다','서울특별시 종로구 묘동 56','010-1234-5678', 100);
+
+create table seller(
+selId varchar(20) PRIMARY KEY,
+selPw varchar(20) NOT NULL,
+selName varchar(20) NOT NULL,
+selAddr varchar(100) NOT NULL,
+selTel varchar(20),
+selGrade int
+)default charset=utf8 collate utf8_general_ci;
+
+set character set 'euckr';
+insert into seller values('100','100','가나다','서울특별시 종로구 묘동 56','010-1234-5678', 100);
+
+create table product(
+proId int PRIMARY KEY AUTO_INCREMENT,
+proName varchar(20) NOT NULL,
+proPrice int NOT NULL,
+proSeller varchar(20) NOT NULL,
+proContent varchar(200),
+proImg varchar(20),
+proExpDate varchar(20),
+proQuantity int
+)default charset=utf8 collate utf8_general_ci;
+
+create table bbs(
+bbsNum int PRIMARY KEY AUTO_INCREMENT,
+bbsProduct int NOT NULL,
+bbsWriter varchar(20) NOT NULL,
+bbsRating int NOT NULL,
+bbsTitle varchar(20),
+bbsContent varchar(100),
+bbsDate varchar(20),
+FOREIGN KEY (bbsProduct) REFERENCES product (proId),
+FOREIGN KEY (bbsWriter) REFERENCES member (memId)
+)default charset=utf8 collate utf8_general_ci;
+
+create table orderT(
+ordId varchar(20),
+ordMember varchar(20),
+ordProduct int,
+ordCount int,
+ordDate varchar(20),
+FOREIGN KEY (ordMember) REFERENCES member (memId),
+FOREIGN KEY (ordProduct) REFERENCES product (proId)
+)default charset=utf8 collate utf8_general_ci;
+
+create table story(
+)default charset=utf8 collate utf8_general_ci;
